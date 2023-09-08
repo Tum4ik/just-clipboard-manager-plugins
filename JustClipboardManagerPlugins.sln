@@ -14,7 +14,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tum4ik.JustClipboardManager.FilesPlugin", "Tum4ik.JustClipboardManager.FilesPlugin\Tum4ik.JustClipboardManager.FilesPlugin.csproj", "{AB10E3C1-543F-4FDF-9ACD-F504CD9EBFFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tum4ik.JustClipboardManager.FilesPlugin", "Tum4ik.JustClipboardManager.FilesPlugin\Tum4ik.JustClipboardManager.FilesPlugin.csproj", "{AB10E3C1-543F-4FDF-9ACD-F504CD9EBFFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{68CC4C6E-3ABF-4CDC-B403-6680F2984FE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{70802965-930F-4D35-929A-665B86DA8C16}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\images-plugin.yml = .github\workflows\images-plugin.yml
+		.github\workflows\files-plugin.yml = .github\workflows\files-plugin.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +41,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{70802965-930F-4D35-929A-665B86DA8C16} = {68CC4C6E-3ABF-4CDC-B403-6680F2984FE2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EFE8887F-E38E-4499-A3FF-B2C09DA03E4A}

@@ -1,0 +1,56 @@
+name: Images Plugin
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The build version'
+        required: true
+        type: string
+        default: '2.0.0'
+      release:
+        description: 'Indicates whether to release'
+        required: true
+        type: boolean
+        default: false
+  pull_request:
+    branches:
+      - 'main'
+    paths:
+      - 'Tum4ik.JustClipboardManager.ImagesPlugin/**'
+
+
+jobs:
+
+  build:
+
+    name: Build ${{ inputs.version }}
+    runs-on: windows-latest
+    env:
+      BuildOutputPath: .\Tum4ik.JustClipboardManager.ImagesPlugin\bin\Release\net7.0-windows
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4.0.0
+      with:
+        fetch-depth: 0
+
+    - name: Install .NET
+      uses: actions/setup-dotnet@v3.2.0
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Build
+      run: |
+        dotnet build ./Tum4ik.JustClipboardManager.ImagesPlugin/Tum4ik.JustClipboardManager.ImagesPlugin.csproj `
+          -c Release `
+          -o ${{ env.BuildOutputPath }}
+          --nologo `
+          /p:Version=${{ inputs.version }}
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        if-no-files-found: error
+        name: Output
+        path: ${{ env.BuildOutputPath }}
