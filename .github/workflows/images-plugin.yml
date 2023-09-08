@@ -4,13 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'The build version'
+        description: 'Build version'
         required: true
         type: string
         default: '2.0.0'
-      release:
-        description: 'Indicates whether to release'
-        required: true
+      is-release:
+        description: 'Release'
         type: boolean
         default: false
   pull_request:
@@ -44,7 +43,7 @@ jobs:
       run: |
         dotnet build ./Tum4ik.JustClipboardManager.ImagesPlugin/Tum4ik.JustClipboardManager.ImagesPlugin.csproj `
           -c Release `
-          -o ${{ env.BuildOutputPath }}
+          -o ${{ env.BuildOutputPath }} `
           --nologo `
           /p:Version=${{ inputs.version }}
 
