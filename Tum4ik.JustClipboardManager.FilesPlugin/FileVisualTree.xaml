@@ -1,0 +1,15 @@
+<Grid x:Class="Tum4ik.JustClipboardManager.FilesPlugin.FileVisualTree"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:controls="clr-namespace:Tum4ik.JustClipboardManager.FilesPlugin.Controls"
+      mc:Ignorable="d" 
+      Height="26" 
+      ToolTip="{Binding RepresentationData}">
+  <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="24"/>
+    <ColumnDefinition/>
+  </Grid.ColumnDefinitions>
+  <controls:SvgIcon Grid.Column="0" Icon="Files" />
+</Grid>
