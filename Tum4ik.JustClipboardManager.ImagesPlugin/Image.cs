@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using Tum4ik.JustClipboardManager.ImagesPlugin.Models;
 using Tum4ik.JustClipboardManager.PluginDevKit;
 using Tum4ik.JustClipboardManager.PluginDevKit.Attributes;
 using Tum4ik.JustClipboardManager.PluginDevKit.Models;
@@ -20,17 +23,28 @@ namespace Tum4ik.JustClipboardManager.ImagesPlugin;
 )]
 public sealed class Image : Plugin<ImageVisualTree>
 {
-  public override string Format { get; } = DataFormats.Bitmap;
+  public override IReadOnlyCollection<string> Formats { get; } = new[] { DataFormats.Bitmap };
 
 
-  public override ClipData? ProcessData(object data)
+  public override ClipData? ProcessData(IDataObject dataObject)
   {
-    var bytes = data switch
+    byte[]? bytes;
+    if (dataObject.GetDataPresent("{526385E6-2B32-42CC-9689-E0EF8FA0A5D3}"))
     {
-      BitmapSource d => GetBitmapSourceBytes(d),
-      Bitmap d => GetBitmapBytes(d),
-      _ => null
-    };
+      // Snagit issue: in some reason if gets data for "Bitmap" - the alpha channel is always zero.
+      // So we have to get data for typeof(Bitmap) in this special case.
+      bytes = GetBitmapBytes((Bitmap) dataObject.GetData(typeof(Bitmap)));
+    }
+    else
+    {
+      bytes = dataObject.GetData(DataFormats.Bitmap) switch
+      {
+        BitmapSource d => GetBitmapSourceBytes(d),
+        Bitmap d => GetBitmapBytes(d),
+        _ => null
+      };
+    }
+
     if (bytes is null)
     {
       return null;
@@ -43,12 +57,21 @@ public sealed class Image : Plugin<ImageVisualTree>
   }
 
 
-  public override object RestoreData(byte[] bytes, string dataDotnetType)
+  public override object? RestoreData(byte[] bytes, string? additionalInfo)
   {
-    var dataType = Type.GetType(dataDotnetType);
+    if (additionalInfo is null)
+    {
+      return null;
+    }
+    var info = JsonSerializer.Deserialize<AdditionalInfo>(additionalInfo);
+    if (info is null)
+    {
+      return null;
+    }
+    var dataType = Type.GetType(info.DotnetType);
     if (dataType is null)
     {
-      return new();
+      return null;
     }
 
     if (dataType.IsAssignableTo(typeof(BitmapSource)))
@@ -60,13 +83,13 @@ public sealed class Image : Plugin<ImageVisualTree>
       return GetBitmapFromBytes(bytes);
     }
 
-    return new();
+    return null;
   }
 
 
-  public override object RestoreRepresentationData(byte[] bytes, string dataDotnetType)
+  public override object? RestoreRepresentationData(byte[] bytes, string? additionalInfo)
   {
-    return RestoreData(bytes, dataDotnetType);
+    return GetBitmapSourceFromBytes(bytes);
   }
 
 
