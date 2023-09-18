@@ -20,8 +20,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{68CC4C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{70802965-930F-4D35-929A-665B86DA8C16}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\images-plugin.yml = .github\workflows\images-plugin.yml
 		.github\workflows\files-plugin.yml = .github\workflows\files-plugin.yml
+		.github\workflows\images-plugin.yml = .github\workflows\images-plugin.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{64E52EA7-5292-415B-8844-E27DF1968D07}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\scripts\DecodePfx.ps1 = .github\workflows\scripts\DecodePfx.ps1
+		.github\workflows\scripts\SignMyCodeFiles.ps1 = .github\workflows\scripts\SignMyCodeFiles.ps1
 	EndProjectSection
 EndProject
 Global
@@ -44,6 +50,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{70802965-930F-4D35-929A-665B86DA8C16} = {68CC4C6E-3ABF-4CDC-B403-6680F2984FE2}
+		{64E52EA7-5292-415B-8844-E27DF1968D07} = {70802965-930F-4D35-929A-665B86DA8C16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EFE8887F-E38E-4499-A3FF-B2C09DA03E4A}
