@@ -81,11 +81,14 @@ jobs:
   github-release:
 
     name: Release ${{ inputs.version }}
-    if: github.event_name == 'pull_request'
+    if: github.event_name != 'pull_request' && ${{ inputs.is-release }}
     needs: build
     runs-on: windows-latest
 
     steps:
+    - name: test
+      run: Write-Host ${{ inputs.is-release }}
+
     - name: Download build artifacts
       uses: actions/download-artifact@v3.0.2
 
