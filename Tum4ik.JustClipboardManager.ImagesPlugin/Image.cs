@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -28,6 +26,11 @@ public sealed class Image : Plugin<ImageVisualTree>
 
   public override ClipData? ProcessData(IDataObject dataObject)
   {
+    if (dataObject is null)
+    {
+      return null;
+    }
+
     byte[]? bytes;
     if (dataObject.GetDataPresent("{526385E6-2B32-42CC-9689-E0EF8FA0A5D3}"))
     {

@@ -73,4 +73,27 @@ jobs:
       with:
         if-no-files-found: error
         name: Output
-        path: ${{ env.DistributionZipFilePath }}
+        path: |
+          ${{ env.DistributionZipFilePath }}
+          .\${{ inputs.plugin-folder }}\ReleaseNotes.md
+
+
+  github-release:
+
+    name: Release ${{ inputs.version }}
+    if: github.event_name != 'pull_request' && ${{ inputs.is-release }}
+    needs: build
+    runs-on: windows-latest
+
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v3.0.2
+
+    - name: GitHub release
+      uses: softprops/action-gh-release@v0.1.15
+      with:
+        tag_name: ${{ inputs.version }}
+        draft: true
+        files: '**/*.zip'
+        body_path: Output/ReleaseNotes.md
+        fail_on_unmatched_files: true
