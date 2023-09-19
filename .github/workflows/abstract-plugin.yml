@@ -81,7 +81,7 @@ jobs:
   github-release:
 
     name: Release ${{ inputs.version }}
-    if: github.event_name != 'pull_request' && ${{ inputs.is-release }} == 'true'
+    if: github.event_name != 'pull_request' && ${{ fromJSON(inputs.is-release) }}
     needs: build
     runs-on: windows-latest
 
@@ -95,5 +95,5 @@ jobs:
         tag_name: ${{ inputs.version }}
         draft: true
         files: '**/*.zip'
-        body_path: '**/ReleaseNotes.md'
+        body_path: 'Output/**/ReleaseNotes.md'
         fail_on_unmatched_files: true
