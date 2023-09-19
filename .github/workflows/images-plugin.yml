@@ -27,4 +27,4 @@ jobs:
       version: ${{ inputs.version }}
       is-release: ${{ inputs.is-release }}
       plugin-folder: 'Tum4ik.JustClipboardManager.ImagesPlugin'
-      files-to-sing: 'Tum4ik.JustClipboardManager.ImagesPlugin.dll'
+      files-to-sign: 'Tum4ik.JustClipboardManager.ImagesPlugin.dll'
