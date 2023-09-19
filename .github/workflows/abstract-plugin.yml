@@ -84,16 +84,15 @@ jobs:
     if: github.event_name != 'pull_request' && ${{ inputs.is-release }}
     needs: build
     runs-on: windows-latest
+    permissions:
+      contents: write
 
     steps:
-    - name: test
-      run: Write-Host ${{ inputs.is-release }}
-
     - name: Download build artifacts
       uses: actions/download-artifact@v3.0.2
 
     - name: GitHub release
-      uses: softprops/action-gh-release@v0.1.14
+      uses: softprops/action-gh-release@v0.1.15
       with:
         tag_name: ${{ inputs.version }}
         draft: true
