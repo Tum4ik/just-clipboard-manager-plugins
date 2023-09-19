@@ -1,9 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <AnalysisMode>All</AnalysisMode>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>Yevheniy Tymchishin</Authors>
+    <Company>Tum4ik</Company>
+    <Copyright>© 2023 Yevheniy Tymchishin. All rights reserved.</Copyright>
+    <Product>JCM Images Plugin</Product>
   </PropertyGroup>
 
   <ItemGroup>

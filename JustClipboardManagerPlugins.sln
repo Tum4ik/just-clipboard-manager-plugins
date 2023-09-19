@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{68CC4C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{70802965-930F-4D35-929A-665B86DA8C16}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\abstract-plugin.yml = .github\workflows\abstract-plugin.yml
 		.github\workflows\files-plugin.yml = .github\workflows\files-plugin.yml
 		.github\workflows\images-plugin.yml = .github\workflows\images-plugin.yml
 	EndProjectSection
