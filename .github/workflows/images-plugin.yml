@@ -22,6 +22,7 @@ on:
 jobs:
 
   call-plugin-workflow:
+    name: Images Plugin
     uses: ./.github/workflows/abstract-plugin.yml
     with:
       version: ${{ inputs.version }}
