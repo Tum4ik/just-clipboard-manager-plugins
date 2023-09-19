@@ -81,7 +81,7 @@ jobs:
   github-release:
 
     name: Release ${{ inputs.version }}
-    if: github.event_name != 'pull_request' && fromJSON(${{ inputs.is-release }})
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: windows-latest
 
