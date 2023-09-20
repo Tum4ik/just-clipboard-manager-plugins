@@ -29,6 +29,7 @@ jobs:
       is-release: ${{ inputs.is-release }}
       plugin-folder: 'Tum4ik.JustClipboardManager.ImagesPlugin'
       files-to-sign: 'Tum4ik.JustClipboardManager.ImagesPlugin.dll'
+      plugin-friendly-name: 'Images Plugin'
     secrets: inherit
     permissions:
       contents: write

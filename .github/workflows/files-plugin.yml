@@ -1,0 +1,35 @@
+name: Files Plugin
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Build version'
+        required: true
+        type: string
+        default: '2.0.0'
+      is-release:
+        description: 'Release'
+        type: boolean
+        default: false
+  pull_request:
+    branches:
+      - 'main'
+    paths:
+      - 'Tum4ik.JustClipboardManager.FilesPlugin/**'
+
+
+jobs:
+
+  call-plugin-workflow:
+    name: Images Plugin
+    uses: ./.github/workflows/abstract-plugin.yml
+    with:
+      version: ${{ inputs.version }}
+      is-release: ${{ inputs.is-release }}
+      plugin-folder: 'Tum4ik.JustClipboardManager.FilesPlugin'
+      files-to-sign: 'Tum4ik.JustClipboardManager.FilesPlugin.dll'
+      plugin-friendly-name: 'Files Plugin'
+    secrets: inherit
+    permissions:
+      contents: write

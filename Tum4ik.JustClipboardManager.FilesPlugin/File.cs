@@ -1,4 +1,3 @@
-using System;
 using System.Text;
 using System.Windows;
 using Tum4ik.JustClipboardManager.PluginDevKit;
@@ -17,13 +16,14 @@ namespace Tum4ik.JustClipboardManager.FilesPlugin;
 )]
 public sealed class File : Plugin<FileVisualTree>
 {
-  public override string Format { get; } = DataFormats.FileDrop;
+  public override IReadOnlyCollection<string> Formats { get; } = new[] { DataFormats.FileDrop };
 
 
-  public override ClipData? ProcessData(object data)
+  public override ClipData? ProcessData(IDataObject dataObject)
   {
-    var stringArray = data as string[];
-    if (stringArray is null)
+    ArgumentNullException.ThrowIfNull(dataObject);
+
+    if (dataObject.GetData(DataFormats.FileDrop) is not string[] stringArray)
     {
       return null;
     }
@@ -38,31 +38,16 @@ public sealed class File : Plugin<FileVisualTree>
   }
 
 
-  public override object RestoreData(byte[] bytes, string dataDotnetType)
+  public override object? RestoreData(byte[] bytes, string? additionalInfo)
   {
-    var dataType = Type.GetType(dataDotnetType);
-    if (dataType is null)
-    {
-      return new();
-    }
-
-    if (dataType == typeof(string[]))
-    {
-      return GetStringArrayFromBytes(bytes);
-    }
-
-    return new();
+    return GetStringArrayFromBytes(bytes);
   }
 
 
-  public override object RestoreRepresentationData(byte[] bytes, string dataDotnetType)
+  public override object? RestoreRepresentationData(byte[] bytes, string? additionalInfo)
   {
-    var data = RestoreData(bytes, dataDotnetType);
-    if (data is string[] strArr)
-    {
-      return string.Join(Environment.NewLine, strArr);
-    }
-    return data;
+    var data = GetStringArrayFromBytes(bytes);
+    return string.Join(Environment.NewLine, data);
   }
 
 

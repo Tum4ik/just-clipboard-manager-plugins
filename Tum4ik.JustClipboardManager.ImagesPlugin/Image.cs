@@ -26,26 +26,28 @@ public sealed class Image : Plugin<ImageVisualTree>
 
   public override ClipData? ProcessData(IDataObject dataObject)
   {
-    if (dataObject is null)
-    {
-      return null;
-    }
+    ArgumentNullException.ThrowIfNull(dataObject);
 
     byte[]? bytes;
+    string assemblyQualifiedName;
     if (dataObject.GetDataPresent("{526385E6-2B32-42CC-9689-E0EF8FA0A5D3}"))
     {
       // Snagit issue: in some reason if gets data for "Bitmap" - the alpha channel is always zero.
       // So we have to get data for typeof(Bitmap) in this special case.
-      bytes = GetBitmapBytes((Bitmap) dataObject.GetData(typeof(Bitmap)));
+      var data = (Bitmap) dataObject.GetData(typeof(Bitmap));
+      bytes = GetBitmapBytes(data);
+      assemblyQualifiedName = data.GetType().AssemblyQualifiedName!;
     }
     else
     {
-      bytes = dataObject.GetData(DataFormats.Bitmap) switch
+      var data = dataObject.GetData(DataFormats.Bitmap);
+      bytes = data switch
       {
         BitmapSource d => GetBitmapSourceBytes(d),
         Bitmap d => GetBitmapBytes(d),
         _ => null
       };
+      assemblyQualifiedName = data.GetType().AssemblyQualifiedName!;
     }
 
     if (bytes is null)
@@ -55,7 +57,8 @@ public sealed class Image : Plugin<ImageVisualTree>
     return new()
     {
       Data = bytes,
-      RepresentationData = bytes
+      RepresentationData = bytes,
+      AdditionalInfo = JsonSerializer.Serialize(new AdditionalInfo { AssemblyQualifiedName = assemblyQualifiedName })
     };
   }
 
@@ -71,7 +74,7 @@ public sealed class Image : Plugin<ImageVisualTree>
     {
       return null;
     }
-    var dataType = Type.GetType(info.DotnetType);
+    var dataType = Type.GetType(info.AssemblyQualifiedName);
     if (dataType is null)
     {
       return null;

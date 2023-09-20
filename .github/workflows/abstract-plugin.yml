@@ -20,6 +20,10 @@ on:
         description: 'Files to sign (comma-separated list)'
         type: string
         required: true
+      plugin-friendly-name:
+        description: 'Plugin friendly name'
+        type: string
+        required: true
 
 
 jobs:
@@ -32,7 +36,7 @@ jobs:
       Scripts: .\.github\workflows\scripts
       TemporaryPfxFilePath: .\GitHubActionsWorkflow.pfx
       PublishOutputPath: .\${{ inputs.plugin-folder }}\bin\Release\net7.0-windows\publish
-      DistributionZipFilePath: .\${{ inputs.plugin-folder }}.zip
+      DistributionZipFilePath: .\${{ inputs.plugin-friendly-name }}.zip
 
     steps:
     - name: Checkout
@@ -92,7 +96,7 @@ jobs:
     - name: GitHub release
       uses: softprops/action-gh-release@v0.1.15
       with:
-        tag_name: ${{ inputs.version }}
+        tag_name: '${{ inputs.plugin-friendly-name }} ${{ inputs.version }}'
         draft: true
         files: '**/*.zip'
         body_path: 'Output/${{ inputs.plugin-folder }}/ReleaseNotes.md'
