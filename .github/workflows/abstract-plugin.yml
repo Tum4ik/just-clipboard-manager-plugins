@@ -70,7 +70,8 @@ jobs:
         Remove-Item -Path ${{ env.TemporaryPfxFilePath }}
 
     - name: Zip
-      run: Compress-Archive -Path ${{ env.PublishOutputPath }}\* -DestinationPath "${{ env.DistributionZipFilePath }}"
+      run: |
+        Compress-Archive -Path ${{ env.PublishOutputPath }}\* -DestinationPath "${{ env.DistributionZipFilePath }}"
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3.1.2
@@ -96,7 +97,8 @@ jobs:
     - name: GitHub release
       uses: softprops/action-gh-release@v0.1.15
       with:
-        tag_name: '${{ inputs.plugin-friendly-name }} ${{ inputs.version }}'
+        name: '${{ inputs.plugin-friendly-name }} ${{ inputs.version }}'
+        tag_name: ${{ inputs.version }}
         draft: true
         files: '**/*.zip'
         body_path: 'Output/${{ inputs.plugin-folder }}/ReleaseNotes.md'
