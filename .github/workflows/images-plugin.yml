@@ -30,6 +30,7 @@ jobs:
       plugin-folder: 'Tum4ik.JustClipboardManager.ImagesPlugin'
       files-to-sign: 'Tum4ik.JustClipboardManager.ImagesPlugin.dll'
       plugin-friendly-name: 'Images Plugin'
+      github-tag-prefix: 'images-plugin'
     secrets: inherit
     permissions:
       contents: write

@@ -24,6 +24,10 @@ on:
         description: 'Plugin friendly name'
         type: string
         required: true
+      github-tag-prefix:
+        description: 'GitHub tag prefix'
+        type: string
+        required: true
 
 
 jobs:
@@ -36,7 +40,7 @@ jobs:
       Scripts: .\.github\workflows\scripts
       TemporaryPfxFilePath: .\GitHubActionsWorkflow.pfx
       PublishOutputPath: .\${{ inputs.plugin-folder }}\bin\Release\net7.0-windows\publish
-      DistributionZipFilePath: .\${{ inputs.plugin-friendly-name }}.zip
+      DistributionZipFilePath: .\${{ inputs.github-tag-prefix }}.zip
 
     steps:
     - name: Checkout
@@ -70,8 +74,7 @@ jobs:
         Remove-Item -Path ${{ env.TemporaryPfxFilePath }}
 
     - name: Zip
-      run: |
-        Compress-Archive -Path ${{ env.PublishOutputPath }}\* -DestinationPath "${{ env.DistributionZipFilePath }}"
+      run: Compress-Archive -Path ${{ env.PublishOutputPath }}\* -DestinationPath ${{ env.DistributionZipFilePath }}
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3.1.2
@@ -98,7 +101,7 @@ jobs:
       uses: softprops/action-gh-release@v0.1.15
       with:
         name: '${{ inputs.plugin-friendly-name }} ${{ inputs.version }}'
-        tag_name: ${{ inputs.version }}
+        tag_name: '${{ inputs.github-tag-prefix }}-${{ inputs.version }}'
         draft: true
         files: '**/*.zip'
         body_path: 'Output/${{ inputs.plugin-folder }}/ReleaseNotes.md'
