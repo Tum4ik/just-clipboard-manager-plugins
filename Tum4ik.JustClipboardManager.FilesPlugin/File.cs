@@ -1,3 +1,4 @@
+using System.Resources;
 using System.Text;
 using System.Windows;
 using Tum4ik.JustClipboardManager.PluginDevKit;
@@ -65,4 +66,10 @@ public sealed class File : Plugin<FileVisualTree>
 }
 
 
-public sealed class FilesPlugin : PluginModule<File> { }
+public sealed class FilesPlugin : PluginModule<File>
+{
+  public override ResourceManager? CreateResourceManager()
+  {
+    return new(typeof(Resources.Translations.Translation));
+  }
+}

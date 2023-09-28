@@ -21,11 +21,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tum4ik.JustClipboardManager.PluginDevKit" Version="2.0.23260.15" />
+    <PackageReference Include="Tum4ik.JustClipboardManager.PluginDevKit" Version="2.0.23270.19" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\Icons\files.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Translations\Translation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Translation.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Translations\Translation.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Translation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
