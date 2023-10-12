@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
-    <PackageReference Include="Tum4ik.JustClipboardManager.PluginDevKit" Version="2.0.23270.19" />
+    <PackageReference Include="Tum4ik.JustClipboardManager.PluginDevKit" Version="2.0.23285.21" />
   </ItemGroup>
   
 </Project>

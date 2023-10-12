@@ -1,6 +1,7 @@
 using System.Resources;
 using System.Text;
 using System.Windows;
+using Prism.Modularity;
 using Tum4ik.JustClipboardManager.PluginDevKit;
 using Tum4ik.JustClipboardManager.PluginDevKit.Attributes;
 using Tum4ik.JustClipboardManager.PluginDevKit.Models;
@@ -8,7 +9,7 @@ using Tum4ik.JustClipboardManager.PluginDevKit.Models;
 namespace Tum4ik.JustClipboardManager.FilesPlugin;
 
 [Plugin(
-  Id = "D2D7663B-39C5-488A-B323-8063963D47F5",
+  Id = PluginId,
   Name = "Files Plugin",
   Version = "2.0.0",
   Author = "Yevheniy Tymchishin",
@@ -17,6 +18,8 @@ namespace Tum4ik.JustClipboardManager.FilesPlugin;
 )]
 public sealed class File : Plugin<FileVisualTree>
 {
+  internal const string PluginId = "D2D7663B-39C5-488A-B323-8063963D47F5";
+
   public override IReadOnlyCollection<string> Formats { get; } = new[] { DataFormats.FileDrop };
 
 
@@ -66,6 +69,7 @@ public sealed class File : Plugin<FileVisualTree>
 }
 
 
+[Module(ModuleName = File.PluginId)]
 public sealed class FilesPlugin : PluginModule<File>
 {
   public override ResourceManager? CreateResourceManager()
