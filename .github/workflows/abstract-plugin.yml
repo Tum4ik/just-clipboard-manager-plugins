@@ -102,7 +102,7 @@ jobs:
         GH_REPO: ${{ github.repository }}
         GITHUB_TOKEN: ${{ github.token }}
       run: |
-        gh release create '${{ inputs.github-tag-prefix }}-${{ inputs.version }}' './*.zip' `
+        gh release create '${{ inputs.github-tag-prefix }}-${{ inputs.version }}' 'Output/*.zip' `
           --draft `
           --title '${{ inputs.plugin-friendly-name }} ${{ inputs.version }}' `
           --notes-file 'Output/${{ inputs.plugin-folder }}/ReleaseNotes.md'
