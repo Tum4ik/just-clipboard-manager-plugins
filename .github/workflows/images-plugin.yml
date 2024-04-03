@@ -7,7 +7,7 @@ on:
         description: 'Build version'
         required: true
         type: string
-        default: '2.0.0'
+        default: '3.0.0'
       is-release:
         description: 'Release'
         type: boolean

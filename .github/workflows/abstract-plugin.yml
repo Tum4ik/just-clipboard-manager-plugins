@@ -7,7 +7,7 @@ on:
         description: 'Build version'
         required: true
         type: string
-        default: '2.0.0'
+        default: '3.0.0'
       is-release:
         description: 'Release'
         type: boolean
@@ -44,14 +44,14 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4.0.0
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
     - name: Install .NET
-      uses: actions/setup-dotnet@v3.2.0
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 8.0.x
 
     - name: Publish
       run: |
@@ -77,7 +77,7 @@ jobs:
       run: Compress-Archive -Path ${{ env.PublishOutputPath }}\* -DestinationPath ${{ env.DistributionZipFilePath }}
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3.1.2
+      uses: actions/upload-artifact@v4
       with:
         if-no-files-found: error
         name: Output
@@ -95,14 +95,22 @@ jobs:
 
     steps:
     - name: Download build artifacts
-      uses: actions/download-artifact@v3.0.2
+      uses: actions/download-artifact@v4
 
     - name: GitHub release
-      uses: softprops/action-gh-release@v0.1.15
-      with:
-        name: '${{ inputs.plugin-friendly-name }} ${{ inputs.version }}'
-        tag_name: '${{ inputs.github-tag-prefix }}-${{ inputs.version }}'
-        draft: true
-        files: '**/*.zip'
-        body_path: 'Output/${{ inputs.plugin-folder }}/ReleaseNotes.md'
-        fail_on_unmatched_files: true
+      env:
+        GH_REPO: ${{ github.repository }}
+        GITHUB_TOKEN: ${{ github.token }}
+      run: |
+        gh release create '${{ inputs.github-tag-prefix }}-${{ inputs.version }}' '**/*.zip' `
+          --draft `
+          --title '${{ inputs.plugin-friendly-name }} ${{ inputs.version }}' `
+          --notes-file 'Output/${{ inputs.plugin-folder }}/ReleaseNotes.md'
+      # uses: softprops/action-gh-release@v0.1.15
+      # with:
+      #   name: '${{ inputs.plugin-friendly-name }} ${{ inputs.version }}'
+      #   tag_name: '${{ inputs.github-tag-prefix }}-${{ inputs.version }}'
+      #   draft: true
+      #   files: '**/*.zip'
+      #   body_path: 'Output/${{ inputs.plugin-folder }}/ReleaseNotes.md'
+      #   fail_on_unmatched_files: true
