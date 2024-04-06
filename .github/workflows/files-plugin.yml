@@ -27,7 +27,7 @@ jobs:
     uses: ./.github/workflows/abstract-plugin.yml
     with:
       version: ${{ inputs.version }}
-      is-release: ${{ inputs.is-release.default }}
+      is-release: inputs.is-release
       plugin-folder: 'Tum4ik.JustClipboardManager.FilesPlugin'
       files-to-sign: 'Tum4ik.JustClipboardManager.FilesPlugin.dll'
       plugin-friendly-name: 'Files Plugin'
