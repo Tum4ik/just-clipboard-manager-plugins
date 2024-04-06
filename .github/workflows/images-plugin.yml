@@ -16,6 +16,7 @@ on:
     branches:
       - 'main'
     paths:
+      - '.github/workflows/**'
       - 'Tum4ik.JustClipboardManager.ImagesPlugin/**'
 
 
