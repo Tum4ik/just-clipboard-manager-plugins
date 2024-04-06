@@ -26,8 +26,8 @@ jobs:
     name: Images Plugin
     uses: ./.github/workflows/abstract-plugin.yml
     with:
-      version: ${{ inputs.version }}
-      is-release: ${{ inputs.is-release }}
+      version: ${{ inputs.version || '3.0.0' }}
+      is-release: ${{ inputs.is-release || false }}
       plugin-folder: 'Tum4ik.JustClipboardManager.ImagesPlugin'
       files-to-sign: 'Tum4ik.JustClipboardManager.ImagesPlugin.dll'
       plugin-friendly-name: 'Images Plugin'
