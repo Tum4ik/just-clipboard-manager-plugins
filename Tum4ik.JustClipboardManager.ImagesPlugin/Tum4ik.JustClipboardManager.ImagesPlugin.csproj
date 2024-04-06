@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AnalysisMode>All</AnalysisMode>
@@ -12,13 +12,13 @@
   <PropertyGroup>
     <Authors>Yevheniy Tymchishin</Authors>
     <Company>Tum4ik</Company>
-    <Copyright>© 2023 Yevheniy Tymchishin. All rights reserved.</Copyright>
+    <Copyright>© 2023-2024 Yevheniy Tymchishin. All rights reserved.</Copyright>
     <Product>JCM Images Plugin</Product>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
-    <PackageReference Include="Tum4ik.JustClipboardManager.PluginDevKit" Version="2.0.23285.21" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
+    <PackageReference Include="Tum4ik.JustClipboardManager.PluginDevKit" Version="3.0.24096.2" />
   </ItemGroup>
   
 </Project>

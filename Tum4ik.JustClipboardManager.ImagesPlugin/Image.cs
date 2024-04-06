@@ -119,7 +119,7 @@ public sealed class Image : Plugin<ImageVisualTree>
   }
 
 
-  private static BitmapSource GetBitmapSourceFromBytes(byte[] bytes)
+  private static BitmapFrame GetBitmapSourceFromBytes(byte[] bytes)
   {
     using var memoryStream = new MemoryStream(bytes);
     return BitmapFrame.Create(memoryStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
