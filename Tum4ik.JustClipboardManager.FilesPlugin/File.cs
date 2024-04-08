@@ -11,7 +11,7 @@ namespace Tum4ik.JustClipboardManager.FilesPlugin;
 [Plugin(
   Id = PluginId,
   Name = "Files Plugin",
-  Version = "2.0.0",
+  Version = "3.0.0",
   Author = "Yevheniy Tymchishin",
   AuthorEmail = "timchishinevgeniy@gmail.com",
   Description = "A simple plugin to deal with the files"
