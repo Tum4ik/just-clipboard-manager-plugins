@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tum4ik.JustClipboardManager.PluginDevKit" Version="3.0.24096.2" />
+    <PackageReference Include="Tum4ik.JustClipboardManager.PluginDevKit" Version="3.2.24131.2" />
   </ItemGroup>
 
   <ItemGroup>

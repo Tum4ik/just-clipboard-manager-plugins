@@ -8,7 +8,8 @@
                                     xmlns:theming="clr-namespace:Tum4ik.JustClipboardManager.PluginDevKit.Theming;assembly=Tum4ik.JustClipboardManager.PluginDevKit"
                                     mc:Ignorable="d" 
                                     Height="26" 
-                                    ToolTip="{Binding RepresentationData}">
+                                    ToolTip="{Binding RepresentationData}"
+                                    Margin="12, 0">
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="24"/>

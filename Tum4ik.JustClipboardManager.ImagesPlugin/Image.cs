@@ -4,7 +4,6 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using Prism.Modularity;
 using Tum4ik.JustClipboardManager.ImagesPlugin.Models;
 using Tum4ik.JustClipboardManager.PluginDevKit;
 using Tum4ik.JustClipboardManager.PluginDevKit.Attributes;
@@ -12,19 +11,9 @@ using Tum4ik.JustClipboardManager.PluginDevKit.Models;
 
 namespace Tum4ik.JustClipboardManager.ImagesPlugin;
 
-[Plugin(
-  Id = PluginId,
-  Name = "Images Plugin",
-  Version = "3.0.0",
-  Author = "Yevheniy Tymchishin",
-  AuthorEmail = "timchishinevgeniy@gmail.com",
-  Description = "A simple plugin to deal with the images"
-)]
-public sealed class Image : Plugin<ImageVisualTree>
+public sealed class Image : Plugin
 {
-  internal const string PluginId = "F4B1D3C8-8A70-4F29-A5C6-940510A9FA5D";
-
-  public override IReadOnlyCollection<string> Formats { get; } = new[] { DataFormats.Bitmap };
+  public override IReadOnlyCollection<string> Formats { get; } = [DataFormats.Bitmap];
 
 
   public override ClipData? ProcessData(IDataObject dataObject)
@@ -133,5 +122,12 @@ public sealed class Image : Plugin<ImageVisualTree>
 }
 
 
-[Module(ModuleName = Image.PluginId)]
-public sealed class ImagesPlugin : PluginModule<Image> { }
+[Plugin(
+  Id = "F4B1D3C8-8A70-4F29-A5C6-940510A9FA5D",
+  Name = "Images Plugin",
+  Version = "3.0.0",
+  Author = "Yevheniy Tymchishin",
+  AuthorEmail = "timchishinevgeniy@gmail.com",
+  Description = "A simple plugin to deal with the images"
+)]
+public sealed class ImagesPlugin : PluginModule<Image, ImageVisualTree> { }

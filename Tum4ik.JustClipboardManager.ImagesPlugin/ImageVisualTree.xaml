@@ -8,4 +8,4 @@
        Source="{Binding RepresentationData}"
        HorizontalAlignment="Left"
        Stretch="Uniform"
-       Margin="0, 1"/>
+       Margin="12, 1"/>

@@ -1,1 +1,1 @@
-Updates for major application version.
+Reflection for development kit improvements.
