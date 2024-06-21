@@ -11,7 +11,7 @@ using Tum4ik.JustClipboardManager.PluginDevKit.Models;
 
 namespace Tum4ik.JustClipboardManager.ImagesPlugin;
 
-public sealed class Image : Plugin
+public sealed class Image : Plugin<ImageVisualTree>
 {
   public override IReadOnlyCollection<string> Formats { get; } = [DataFormats.Bitmap];
 
@@ -125,9 +125,9 @@ public sealed class Image : Plugin
 [Plugin(
   Id = "F4B1D3C8-8A70-4F29-A5C6-940510A9FA5D",
   Name = "Images Plugin",
-  Version = "3.0.0",
+  Version = "1.0.0",
   Author = "Yevheniy Tymchishin",
   AuthorEmail = "timchishinevgeniy@gmail.com",
   Description = "A simple plugin to deal with the images"
 )]
-public sealed class ImagesPlugin : PluginModule<Image, ImageVisualTree> { }
+public sealed class ImagesPlugin : PluginModule<Image> { }

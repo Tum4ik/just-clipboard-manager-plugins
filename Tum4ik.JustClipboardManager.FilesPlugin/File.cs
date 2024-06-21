@@ -7,7 +7,7 @@ using Tum4ik.JustClipboardManager.PluginDevKit.Models;
 
 namespace Tum4ik.JustClipboardManager.FilesPlugin;
 
-public sealed class File : Plugin
+public sealed class File : Plugin<FileVisualTree>
 {
   public override IReadOnlyCollection<string> Formats { get; } = [DataFormats.FileDrop];
 
@@ -61,14 +61,14 @@ public sealed class File : Plugin
 [Plugin(
   Id = "D2D7663B-39C5-488A-B323-8063963D47F5",
   Name = "Files Plugin",
-  Version = "3.0.0",
+  Version = "1.0.0",
   Author = "Yevheniy Tymchishin",
   AuthorEmail = "timchishinevgeniy@gmail.com",
   Description = "A simple plugin to deal with the files"
 )]
-public sealed class FilesPlugin : PluginModule<File, FileVisualTree>
+public sealed class FilesPlugin : PluginModule<File>
 {
-  public override ResourceManager? CreateResourceManager()
+  protected override ResourceManager? CreateResourceManager()
   {
     return new(typeof(Resources.Translations.Translation));
   }
