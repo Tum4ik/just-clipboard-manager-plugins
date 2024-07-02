@@ -21,7 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tum4ik.JustClipboardManager.PluginDevKit" Version="3.2.24165.4" />
+    <PackageReference Include="Tum4ik.JustClipboardManager.PluginDevKit" Version="3.2.24165.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>compile</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
