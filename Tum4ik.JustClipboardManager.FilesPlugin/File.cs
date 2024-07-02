@@ -66,7 +66,7 @@ public sealed class File : Plugin<FileVisualTree>
   AuthorEmail = "timchishinevgeniy@gmail.com",
   Description = "A simple plugin to deal with the files"
 )]
-public sealed class FilesPlugin : PluginModule<File>
+public sealed class FilesPluginModule : PluginModule<File>
 {
   protected override ResourceManager? CreateResourceManager()
   {

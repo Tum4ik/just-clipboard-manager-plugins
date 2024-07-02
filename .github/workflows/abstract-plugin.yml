@@ -39,7 +39,7 @@ jobs:
     env:
       Scripts: .\.github\workflows\scripts
       TemporaryPfxFilePath: .\GitHubActionsWorkflow.pfx
-      PublishOutputPath: .\${{ inputs.plugin-folder }}\bin\Release\net7.0-windows\publish
+      PublishOutputPath: .\${{ inputs.plugin-folder }}\bin\Release\publish
       DistributionZipFilePath: .\${{ inputs.github-tag-prefix }}.zip
 
     steps:

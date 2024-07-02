@@ -130,4 +130,4 @@ public sealed class Image : Plugin<ImageVisualTree>
   AuthorEmail = "timchishinevgeniy@gmail.com",
   Description = "A simple plugin to deal with the images"
 )]
-public sealed class ImagesPlugin : PluginModule<Image> { }
+public sealed class ImagesPluginModule : PluginModule<Image> { }
