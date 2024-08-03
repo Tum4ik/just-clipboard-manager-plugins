@@ -2,7 +2,7 @@
   {
     "Id": "F4B1D3C8-8A70-4F29-A5C6-940510A9FA5D",
     "Name": "Images Plugin",
-    "Version": "1.0.5",
+    "Version": "1.0.6",
     "Author": "Yevheniy Tymchishin",
     "AuthorEmail": "timchishinevgeniy@gmail.com",
     "Description": "A simple plugin to deal with the images",
