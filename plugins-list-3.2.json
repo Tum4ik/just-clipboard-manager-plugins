@@ -11,7 +11,7 @@
   {
     "Id": "D2D7663B-39C5-488A-B323-8063963D47F5",
     "Name": "Files Plugin",
-    "Version": "1.0.5",
+    "Version": "1.0.0",
     "Author": "Yevheniy Tymchishin",
     "AuthorEmail": "timchishinevgeniy@gmail.com",
     "Description": "A simple plugin to deal with the files",
