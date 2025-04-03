@@ -1,3 +1,26 @@
-{
-
-}
+[
+  {
+    "id": "F4B1D3C8-8A70-4F29-A5C6-940510A9FA5D",
+    "name": "Images Plugin",
+    "version": "1.0.0",
+    "downloadLink": "https://github.com/Tum4ik/just-clipboard-manager-plugins/releases/download/images-plugin-1.0.0/images-plugin.zip",
+    "author": "Yevheniy Tymchishin",
+    "authorEmail": "timchishinevgeniy@gmail.com",
+    "description": {
+      "en": "A simple plugin to deal with the images",
+      "uk": "Простий плагін для роботи з зображеннями"
+    }
+  },
+  {
+    "id": "D2D7663B-39C5-488A-B323-8063963D47F5",
+    "name": "Files Plugin",
+    "version": "1.0.0",
+    "downloadLink": "https://github.com/Tum4ik/just-clipboard-manager-plugins/releases/download/files-plugin-1.0.0/files-plugin.zip",
+    "author": "Yevheniy Tymchishin",
+    "authorEmail": "timchishinevgeniy@gmail.com",
+    "description": {
+      "en": "A simple plugin to deal with the files",
+      "uk": "Простий плагін для роботи з файлами"
+    }
+  }
+]
