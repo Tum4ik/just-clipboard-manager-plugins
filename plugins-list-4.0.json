@@ -7,8 +7,8 @@
     "author": "Yevheniy Tymchishin",
     "authorEmail": "timchishinevgeniy@gmail.com",
     "description": {
-      "en": "A simple plugin to deal with the images",
-      "uk": "Простий плагін для роботи з зображеннями"
+      "en": "Plugin for Just Clipboard Manager that allows you to save images from the clipboard",
+      "uk": "Плагін для Just Clipboard Manager, який дозволяє зберігати зображення з буфера обміну"
     }
   },
   {
