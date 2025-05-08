@@ -70,7 +70,6 @@ jobs:
           ${{ inputs.plugin-folder }}/info.json
 
   github-release:
-    if: false
     name: Release ${{ needs.build.outputs.version }}
     needs: build
     runs-on: ubuntu-latest
@@ -87,7 +86,8 @@ jobs:
         GH_REPO: ${{ github.repository }}
         GITHUB_TOKEN: ${{ github.token }}
       run: |
-        gh release create '${{ needs.build.outputs.tag-prefix }}-${{ needs.build.outputs.version }}' (Get-Item Output/*.zip) `
+        gh release create '${{ needs.build.outputs.tag-prefix }}-${{ needs.build.outputs.version }}' `
+          Output/*.zip Output/info.json `
           --draft `
           --title '${{ needs.build.outputs.friendly-name }} ${{ needs.build.outputs.version }}' `
           --notes-file 'Output/release-notes.md'
