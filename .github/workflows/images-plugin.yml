@@ -1,0 +1,14 @@
+name: Images plugin
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-plugin-workflow:
+    name: Images plugin
+    uses: ./.github/workflows/plugin.yml
+    with:
+      plugin-folder: ./images-plugin
+    secrets: inherit
+    permissions:
+      contents: write

@@ -1,0 +1,92 @@
+name: Plugin base release
+
+on:
+  workflow_call:
+    inputs:
+      plugin-folder:
+        description: 'Plugin source files folder'
+        type: string
+        required: true
+
+jobs:
+  build:
+    name:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: ${{ inputs.plugin-folder }}
+    # permissions:
+    #   id-token: write
+    outputs:
+      version: ${{ steps.get-info.outputs.version }}
+      tag-prefix: ${{ steps.get-info.outputs.tag-prefix }}
+      friendly-name: ${{ steps.get-info.outputs.friendly-name }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Get info
+      id: get-info
+      run: |
+        $packageJson = Get-Content ./package.json -Raw | ConvertFrom-Json
+        $version = $packageJson.version
+        $tagPrefix = $packageJson.name
+        $friendlyName = $packageJson.pluginMetadata.name
+        Write-Host "$friendlyName $version" -ForegroundColor green
+        echo "version=$version" >> $env:GITHUB_OUTPUT
+        echo "tag-prefix=$tagPrefix" >> $env:GITHUB_OUTPUT
+        echo "friendly-name=$friendlyName" >> $env:GITHUB_OUTPUT
+        $info = $packageJson.pluginMetadata
+        $info.version = $version
+        $info.author = $packageJson.author
+        $info | ConvertTo-Json | Out-File -FilePath ./info.json
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: 'npm'
+
+    - name: Clean Install
+      run: npm ci
+
+    - name: Build
+      run: npm run build
+
+    - name: Zip
+      run: Compress-Archive -Path ./out/plugin-bundle.mjs -DestinationPath ./plugin-bundle.zip
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        if-no-files-found: error
+        name: Output
+        path: |
+          ./plugin-bundle.zip
+          ./release-notes.md
+          ./info.json
+
+  github-release:
+    if: false
+    name: Release ${{ needs.build.outputs.version }}
+    needs: build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+
+    - name: GitHub release
+      env:
+        GH_REPO: ${{ github.repository }}
+        GITHUB_TOKEN: ${{ github.token }}
+      run: |
+        gh release create '${{ needs.build.outputs.tag-prefix }}-${{ needs.build.outputs.version }}' (Get-Item Output/*.zip) `
+          --draft `
+          --title '${{ needs.build.outputs.friendly-name }} ${{ needs.build.outputs.version }}' `
+          --notes-file 'Output/release-notes.md'

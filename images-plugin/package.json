@@ -1,0 +1,47 @@
+{
+  "name": "images-plugin",
+  "version": "1.0.0",
+  "pluginMetadata": {
+    "id": "f4b1d3c8-8a70-4f29-a5c6-940510a9fa5d",
+    "name": "Images plugin",
+    "description": {
+      "en": "Plugin for Just Clipboard Manager that allows you to save images from the clipboard",
+      "uk": "Плагін для Just Clipboard Manager, який дозволяє зберігати зображення з буфера обміну"
+    }
+  },
+  "author": {
+    "name": "Yevheniy Tymchishin",
+    "email": "timchishinevgeniy@gmail.com"
+  },
+  "keywords": [
+    "just-clipboard-manager",
+    "plugins"
+  ],
+  "homepage": "https://github.com/Tum4ik/just-clipboard-manager-plugins#readme",
+  "bugs": {
+    "url": "https://github.com/Tum4ik/just-clipboard-manager-plugins/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tum4ik/just-clipboard-manager-plugins.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "just-clipboard-manager-pdk": "^4.0.21"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@rollup/plugin-json": "^6.1.0",
+    "rollup": "^4.40.1",
+    "typescript": "^5.8.3",
+    "tslib": "^2.8.1"
+  }
+}
