@@ -48,6 +48,7 @@ jobs:
       with:
         node-version: 22
         cache: 'npm'
+        cache-dependency-path: ${{ inputs.plugin-folder }}/package-lock.json
 
     - name: Clean Install
       run: npm ci
