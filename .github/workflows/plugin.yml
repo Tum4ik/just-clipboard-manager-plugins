@@ -39,8 +39,8 @@ jobs:
         echo "tag-prefix=$tagPrefix" >> $env:GITHUB_OUTPUT
         echo "friendly-name=$friendlyName" >> $env:GITHUB_OUTPUT
         $info = $packageJson.pluginMetadata
-        $info.version = $version
-        $info.author = $packageJson.author
+        $info | Add-Member -Name version -Value $version
+        $info | Add-Member -Name author -Value $packageJson.author
         $info | ConvertTo-Json | Out-File -FilePath ./info.json
 
     - name: Setup Node.js
