@@ -65,9 +65,9 @@ jobs:
         if-no-files-found: error
         name: Output
         path: |
-          ./plugin-bundle.zip
-          ./release-notes.md
-          ./info.json
+          ${{ inputs.plugin-folder }}/plugin-bundle.zip
+          ${{ inputs.plugin-folder }}/release-notes.md
+          ${{ inputs.plugin-folder }}/info.json
 
   github-release:
     if: false
