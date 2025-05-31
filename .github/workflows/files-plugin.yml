@@ -1,0 +1,14 @@
+name: Files plugin
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-plugin-workflow:
+    name: Files plugin
+    uses: ./.github/workflows/plugin.yml
+    with:
+      plugin-folder: ./files-plugin
+    secrets: inherit
+    permissions:
+      contents: write
