@@ -10,14 +10,12 @@ on:
 
 jobs:
   build:
-    name:
+    name: Build
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: pwsh
         working-directory: ${{ inputs.plugin-folder }}
-    # permissions:
-    #   id-token: write
     outputs:
       version: ${{ steps.get-info.outputs.version }}
       tag-prefix: ${{ steps.get-info.outputs.tag-prefix }}
@@ -46,7 +44,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 22
+        node-version: 24
         cache: 'npm'
         cache-dependency-path: ${{ inputs.plugin-folder }}/package-lock.json
 

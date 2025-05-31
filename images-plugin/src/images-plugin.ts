@@ -3,7 +3,7 @@ import { resize } from "./functions/resize.js";
 import { retrievePixelsData } from "./functions/retrieve-pixels-data.js";
 
 export class ImagesPlugin extends ClipboardDataPlugin {
-  private readonly _formats = ['CF_DIBV5'/* , 'CF_DIB' */];
+  private readonly _formats: readonly string[] = ['CF_DIBV5'/* , 'CF_DIB' */];
   override get formats(): readonly string[] {
     return this._formats;
   }
