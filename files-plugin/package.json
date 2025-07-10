@@ -1,6 +1,6 @@
 {
   "name": "files-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "pluginMetadata": {
     "id": "d2d7663b-39c5-488a-b323-8063963d47f5",
     "name": "Files plugin",
@@ -21,14 +21,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "just-clipboard-manager-pdk": "^4.0.24"
+    "just-clipboard-manager-pdk": "^4.0.27"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-commonjs": "^28.0.6",
     "@rollup/plugin-node-resolve": "^16.0.1",
-    "@rollup/plugin-typescript": "^12.1.2",
+    "@rollup/plugin-typescript": "^12.1.4",
     "@rollup/plugin-json": "^6.1.0",
-    "rollup": "^4.41.1",
+    "rollup": "^4.44.2",
     "typescript": "^5.8.3",
     "tslib": "^2.8.1"
   }

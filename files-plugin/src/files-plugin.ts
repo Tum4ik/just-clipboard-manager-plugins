@@ -1,29 +1,25 @@
 import { ClipboardDataPlugin, createElement, RepresentationData } from "just-clipboard-manager-pdk";
 
 export class FilesPlugin extends ClipboardDataPlugin {
-  private readonly _formats: readonly string[] = ['CF_HDROP'];
-  override get formats(): readonly string[] {
-    return this._formats;
+  private readonly _representationFormats: readonly string[] = ['CF_HDROP'];
+  override get representationFormats(): readonly string[] {
+    return this._representationFormats;
   }
 
-  override extractRepresentationData(data: Uint8Array, format: string): RepresentationData {
-    return { data };
+  private readonly _formatsToSave = ['CF_HDROP'];
+  override get formatsToSave(): readonly string[] {
+    return this._formatsToSave;
+  }
+
+  private readonly decoderUtf16le = new TextDecoder('utf-16le');
+  private readonly decoderWindows1252 = new TextDecoder('windows-1252');
+
+  override extractRepresentationData(data: Uint8Array, format: string): { representationData: RepresentationData; searchLabel?: string; } {
+    return { representationData: { data } };
   }
 
   override getRepresentationDataElement(representationData: RepresentationData, format: string, document: Document): HTMLElement {
-    const dataView = new DataView(representationData.data.buffer);
-    const pFiles = dataView.getUint32(0, true);
-    const fWide = dataView.getUint32(16, true) !== 0;
-    const bytes = representationData.data.slice(pFiles);
-    let decoder: TextDecoder;
-    if (fWide) {
-      decoder = new TextDecoder('utf-16le');
-    }
-    else {
-      decoder = new TextDecoder('windows-1252');
-    }
-    const decoded = decoder.decode(bytes);
-    const items = decoded.split('\0').map(i => i.trim()).filter(i => i.length > 0);
+    const items = this.getItems(representationData.data);
 
     return createElement(document, 'div', {
       style: {
@@ -76,7 +72,29 @@ export class FilesPlugin extends ClipboardDataPlugin {
     });
   }
 
-  override getSearchLabel(data: Uint8Array, format: string): string | null {
-    return null;
+  override getFullDataPreviewElement(data: Uint8Array, format: string, document: Document): HTMLElement {
+    const items = this.getItems(data);
+    const pre = document.createElement('pre');
+    pre.textContent = items.join('\n');
+    pre.style.textWrap = 'nowrap';
+    pre.style.margin = '0';
+    return pre;
+  }
+
+
+  private getItems(data: Uint8Array): string[] {
+    const dataView = new DataView(data.buffer);
+    const pFiles = dataView.getUint32(0, true);
+    const fWide = dataView.getUint32(16, true) !== 0;
+    const bytes = data.slice(pFiles);
+    let decoder: TextDecoder;
+    if (fWide) {
+      decoder = this.decoderUtf16le;
+    }
+    else {
+      decoder = this.decoderWindows1252;
+    }
+    const decoded = decoder.decode(bytes);
+    return decoded.split('\0').map(i => i.trim()).filter(i => i.length > 0);
   }
 }
