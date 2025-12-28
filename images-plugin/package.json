@@ -21,7 +21,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "just-clipboard-manager-pdk": "^4.0.27"
+    "just-clipboard-manager-pdk": "4.0.31"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.6",
